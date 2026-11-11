@@ -10,6 +10,7 @@ import {
   FieldSeparator,
 } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
+import { Link } from "react-router-dom";
 
 function LoginForm({ className, ...props }) {
   return (
@@ -88,7 +89,7 @@ function LoginForm({ className, ...props }) {
                 </Button>
               </Field>
               <FieldDescription className="text-center">
-                Don&apos;t have an account? <a href="#">Sign up</a>
+                Don&apos;t have an account? <Link to="/signup">Sign up</Link>
               </FieldDescription>
             </FieldGroup>
           </form>

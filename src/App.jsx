@@ -1,15 +1,15 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import LoginPage from "./pages/auth/LoginPage";
 import AuthLayout from "./layouts/AuthLayout";
-import SignupPage from "./pages/auth/SignupPage";
+import LoginForm from "./authpages/LoginForm";
+import SignupForm from "./authpages/SignupForm";
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
         <Route element={<AuthLayout />}>
-          <Route path="/" element={<LoginPage />} />
-          <Route path="/signup" element={<SignupPage />} />
+          <Route path="/" element={<LoginForm />} />
+          <Route path="/signup" element={<SignupForm />} />
         </Route>
       </Routes>
     </BrowserRouter>

@@ -10,9 +10,7 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
   SidebarRail,
-  SidebarTrigger,
 } from "@/components/ui/sidebar";
-import { Outlet } from "react-router-dom";
 
 // This is sample data.
 const data = {
@@ -72,7 +70,6 @@ function AppSidebar({ ...props }) {
           </SidebarGroup>
         ))}
       </SidebarContent>
-
       <SidebarRail />
     </Sidebar>
   );

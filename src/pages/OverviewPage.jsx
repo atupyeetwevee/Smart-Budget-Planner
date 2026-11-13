@@ -1,5 +1,9 @@
 function OverviewPage() {
-  return <div>OverviewPage</div>;
+  return (
+    <div className="bg-green-400">
+      <p>yuoiuiijli</p>
+    </div>
+  );
 }
 
 export default OverviewPage;

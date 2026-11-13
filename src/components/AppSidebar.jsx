@@ -10,7 +10,9 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
   SidebarRail,
+  SidebarTrigger,
 } from "@/components/ui/sidebar";
+import { Outlet } from "react-router-dom";
 
 // This is sample data.
 const data = {
@@ -51,9 +53,6 @@ const data = {
 function AppSidebar({ ...props }) {
   return (
     <Sidebar {...props}>
-      {/* <SidebarHeader>
-       
-      </SidebarHeader> */}
       <SidebarContent>
         {/* We create a SidebarGroup for each parent. */}
         {data.navMain.map((item) => (
@@ -73,6 +72,7 @@ function AppSidebar({ ...props }) {
           </SidebarGroup>
         ))}
       </SidebarContent>
+
       <SidebarRail />
     </Sidebar>
   );

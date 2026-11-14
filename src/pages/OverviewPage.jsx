@@ -55,13 +55,17 @@ function OverviewPage() {
             <div className="col-span-2 bg-muted rounded-xl aspect-auto">
               <ChartPieDonutText />
             </div>
-            <div className=" bg-muted rounded-xl aspect-video"></div>
+            <div className=" bg-muted rounded-xl aspect-video">
+              <h2>Saving Goal</h2>
+            </div>
           </div>
           <div className="grid grid-cols-3 gap-5">
             <div className="col-span-2 bg-muted rounded-xl aspect-auto">
-              <ChartPieDonutText />{" "}
+              <h2>Recent Transactions</h2>
             </div>
-            <div className=" bg-muted rounded-xl aspect-video"></div>
+            <div className=" bg-muted rounded-xl aspect-video">
+              <h2>Well done you're on track</h2>
+            </div>
           </div>
         </div>
       </div>

@@ -31,19 +31,19 @@ const chartConfig = {
     label: "Visitors",
   },
   chrome: {
-    label: "Chrome",
+    label: "Bills",
     color: "var(--chart-1)",
   },
   safari: {
-    label: "Safari",
+    label: "Groceries",
     color: "var(--chart-2)",
   },
   firefox: {
-    label: "Firefox",
+    label: "Entertainment",
     color: "var(--chart-3)",
   },
   edge: {
-    label: "Edge",
+    label: "Savings",
     color: "var(--chart-4)",
   },
   other: {
@@ -60,13 +60,13 @@ export function ChartPieDonutText() {
   return (
     <Card className="flex flex-col">
       <CardHeader className="items-center pb-0">
-        <CardTitle>Pie Chart - Donut with Text</CardTitle>
-        <CardDescription>January - June 2024</CardDescription>
+        <CardTitle>Spending Overview</CardTitle>
+        <CardDescription>November 2026</CardDescription>
       </CardHeader>
       <CardContent className="flex-1 pb-0">
         <ChartContainer
           config={chartConfig}
-          className="mx-auto aspect-square max-h-[250px]"
+          className="mx-auto aspect-video max-h-[250px]"
         >
           <PieChart>
             <ChartTooltip

@@ -4,11 +4,12 @@ import LoginForm from "./authpages/LoginForm";
 import SignupForm from "./authpages/SignupForm";
 import AppLayout from "./layouts/AppLayout";
 import OverviewPage from "./pages/OverviewPage";
-import TransactionPage from "./pages/TransactionPage";
-import WalletPage from "./pages/WalletPage";
-import GoalsPage from "./pages/GoalsPage";
+
 import SettingsPage from "./pages/SettingsPage";
 import BudgetPage from "./pages/BudgetPage";
+import IncomePage from "./pages/IncomePage";
+import SavingsPage from "./pages/SavingsPage";
+import FinancialReportPage from "./pages/FinancialReportPage";
 
 function App() {
   return (
@@ -23,9 +24,9 @@ function App() {
         {/* Main pages */}
         <Route path="/" element={<AppLayout />}>
           <Route path="/" element={<OverviewPage />} />
-          <Route path="transaction" element={<TransactionPage />} />
-          <Route path="wallet" element={<WalletPage />} />
-          <Route path="goals" element={<GoalsPage />} />
+          <Route path="income&expenses" element={<IncomePage />} />
+          <Route path="savings" element={<SavingsPage />} />
+          <Route path="goals" element={<FinancialReportPage />} />
           <Route path="budget" element={<BudgetPage />} />
           <Route path="settings" element={<SettingsPage />} />
         </Route>

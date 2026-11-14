@@ -24,20 +24,20 @@ const data = {
           url: "/",
         },
         {
-          title: "Wallet",
-          url: "/wallet",
+          title: "Income & Expenses Management",
+          url: "/income&expenses",
         },
         {
-          title: "Transactions",
-          url: "/transaction",
+          title: "Savings & Goals Management",
+          url: "/savings",
         },
         {
-          title: "Goals",
-          url: "/goals",
-        },
-        {
-          title: "Budget",
+          title: "Budget Management",
           url: "/budget",
+        },
+        {
+          title: "Financial Report",
+          url: "/report",
         },
         {
           title: "Settings",

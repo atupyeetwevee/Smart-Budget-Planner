@@ -58,9 +58,9 @@ export function ChartPieDonutText() {
   }, []);
 
   return (
-    <Card className="flex flex-col">
+    <Card className="flex flex-col bg-muted">
       <CardHeader className="items-center pb-0">
-        <CardTitle>Spending Overview</CardTitle>
+        <CardTitle>Spending Breakdown</CardTitle>
         <CardDescription>November 2026</CardDescription>
       </CardHeader>
       <CardContent className="flex-1 pb-0">

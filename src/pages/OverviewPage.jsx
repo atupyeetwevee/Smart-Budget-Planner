@@ -2,6 +2,8 @@ import { ChartPieDonutText } from "@/components/ui/chartDonutText";
 import { Button } from "@/components/ui/button";
 import { Icon } from "@iconify/react";
 import { LucideArrowRight } from "lucide-react";
+import RecentTransactionTable from "@/components/RecentTransactionTable";
+import LiveEmoji from "@/components/LiveEmoji";
 
 function OverviewPage() {
   const summaryCards = [
@@ -54,15 +56,15 @@ function OverviewPage() {
         </div>
         <div className="flex-1 flex flex-col gap-5 rounded-xl min-h-0">
           <div className="grid grid-cols-3 gap-5">
-            <div className="col-span-2 bg-muted rounded-xl aspect-auto">
+            <div className="col-span-2 rounded-xl aspect-auto">
               <ChartPieDonutText />
             </div>
-            <div className="bg-muted p-4 rounded-xl aspect-video">
+            <div className="bg-muted p-4 rounded-xl aspect-video space-y-4">
               <h2 className="font-bold">Smart Tip</h2>
               <p>Your savings goal of TZS 300,000 is achievable this month!</p>
               <Button
                 variant="outline"
-                className="bg-black hover:bg-gray-700 text-white"
+                className="bg-lime-300 hover:bg-chart-4 text-white"
               >
                 View Details
                 <LucideArrowRight />
@@ -70,11 +72,18 @@ function OverviewPage() {
             </div>
           </div>
           <div className="grid grid-cols-3 gap-5">
-            <div className="col-span-2 bg-muted rounded-xl aspect-auto">
-              <h2>Recent Transactions</h2>
+            <div className="col-span-2 bg-muted rounded-xl aspect-auto p-4">
+              <div className="flex gap-5 justify-between">
+                <h2 className="font-bold">Recent Transactions</h2>
+                <Button className="bg-lime-300 hover:bg-chart-4">
+                  See all <LucideArrowRight />
+                </Button>
+              </div>
+              <RecentTransactionTable />
             </div>
             <div className=" bg-muted rounded-xl aspect-video">
-              <h2>Well done you're on track</h2>
+              <h2 className="font-bold p-4">Well done you're on track</h2>
+              <LiveEmoji />
             </div>
           </div>
         </div>

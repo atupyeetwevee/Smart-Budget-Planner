@@ -64,7 +64,7 @@ function OverviewPage() {
               <p>Your savings goal of TZS 300,000 is achievable this month!</p>
               <Button
                 variant="outline"
-                className="bg-lime-300 hover:bg-chart-4 text-white"
+                className="bg-lime-300/80 hover:bg-chart-4 text-white"
               >
                 View Details
                 <LucideArrowRight />
@@ -75,7 +75,7 @@ function OverviewPage() {
             <div className="col-span-2 bg-muted rounded-xl aspect-auto p-4">
               <div className="flex gap-5 justify-between">
                 <h2 className="font-bold">Recent Transactions</h2>
-                <Button className="bg-lime-300 hover:bg-chart-4">
+                <Button className="bg-lime-300/80 hover:bg-chart-4">
                   See all <LucideArrowRight />
                 </Button>
               </div>

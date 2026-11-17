@@ -1,7 +1,7 @@
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 // import { Separator } from "./ui/separator";
 
-function TabsDisabled() {
+function IncomeExpensesTab() {
   return (
     <Tabs defaultValue="home" className="w-full items-center">
       <TabsList className="w-1/2">
@@ -17,4 +17,4 @@ function TabsDisabled() {
   );
 }
 
-export default TabsDisabled;
+export default IncomeExpensesTab;

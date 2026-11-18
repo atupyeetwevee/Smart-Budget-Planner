@@ -45,12 +45,7 @@ function SavingsPage() {
             >
               <p>{item.title}</p>
               <p>{item.amount}</p>
-              <Progress value={item.progress} className="w-full max-w-sm">
-                <ProgressIndicator
-                  className=""
-                  style={{ backgroundColor: item.color }}
-                />
-              </Progress>
+              <Progress value={item.progress} color={item.color} />
             </div>
           ))}
         </div>

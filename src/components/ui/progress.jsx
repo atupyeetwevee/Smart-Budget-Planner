@@ -1,7 +1,7 @@
 import { Progress as ProgressPrimitive } from "@base-ui/react/progress";
 import { cn } from "cn";
 
-function Progress({ className, children, value, ...props }) {
+function Progress({ className, children, value, color, ...props }) {
   return (
     <ProgressPrimitive.Root
       value={value}
@@ -11,7 +11,7 @@ function Progress({ className, children, value, ...props }) {
     >
       {children}
       <ProgressTrack>
-        <ProgressIndicator />
+        <ProgressIndicator style={{ backgroundColor: color }} />
       </ProgressTrack>
     </ProgressPrimitive.Root>
   );
@@ -21,7 +21,7 @@ function ProgressTrack({ className, ...props }) {
   return (
     <ProgressPrimitive.Track
       className={cn(
-        "relative flex h-3 w-full items-center overflow-x-hidden rounded-4xl bg-muted",
+        "relative flex h-3 w-full items-center overflow-x-hidden rounded-4xl bg-white/50",
         className,
       )}
       data-slot="progress-track"

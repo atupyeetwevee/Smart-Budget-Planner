@@ -10,6 +10,7 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
   SidebarRail,
+  SidebarTrigger,
 } from "@/components/ui/sidebar";
 
 // This is sample data.
@@ -69,6 +70,7 @@ function AppSidebar({ ...props }) {
             </SidebarGroupContent>
           </SidebarGroup>
         ))}
+        <SidebarTrigger className="-ml-1" />
       </SidebarContent>
       <SidebarRail />
     </Sidebar>

@@ -52,7 +52,7 @@ const data = {
 function AppSidebar({ ...props }) {
   return (
     <Sidebar {...props}>
-      <SidebarContent>
+      <SidebarContent className="flex flex-row justify-between">
         {/* We create a SidebarGroup for each parent. */}
         {data.navMain.map((item) => (
           <SidebarGroup key={item.title}>

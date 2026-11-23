@@ -6,43 +6,51 @@ import {
   SidebarGroup,
   SidebarGroupContent,
   SidebarGroupLabel,
+  SidebarHeader,
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
   SidebarRail,
   SidebarTrigger,
 } from "@/components/ui/sidebar";
+import { Icon } from "@iconify/react";
 
 // This is sample data.
 const data = {
   navMain: [
     {
-      title: "Architecture",
+      title: "",
       url: "#",
       items: [
         {
           title: "Overview",
           url: "/",
+          icon: "mdi:home",
         },
         {
           title: "Income & Expenses Management",
           url: "/income&expenses",
+          icon: "mdi:wallet",
         },
         {
           title: "Savings & Goals Management",
           url: "/savings",
+          icon: "mdi:piggy-bank",
         },
         {
           title: "Budget Management",
           url: "/budget",
+          icon: "mdi:coins",
         },
         {
           title: "Financial Report",
           url: "/report",
+          icon: "mdi:folder",
         },
         {
           title: "Settings",
           url: "/settings",
+          icon: "mdi:settings",
         },
       ],
     },
@@ -52,25 +60,36 @@ const data = {
 function AppSidebar({ ...props }) {
   return (
     <Sidebar {...props}>
+      <SidebarHeader className="flex-row justify-between text-2xl">
+        <h2 className="">Smart Budget Planner</h2>{" "}
+        <SidebarTrigger className="-ml-1 text-center " />
+      </SidebarHeader>
       <SidebarContent className="flex flex-row justify-between">
+        {/* <SidebarTrigger className="-ml-1 text-center " /> */}
         {/* We create a SidebarGroup for each parent. */}
         {data.navMain.map((item) => (
-          <SidebarGroup key={item.title}>
-            <SidebarGroupLabel>{item.title}</SidebarGroupLabel>
+          <SidebarGroup key={item.title} className="">
+            <SidebarGroupLabel classname="">{item.title}</SidebarGroupLabel>
+
             <SidebarGroupContent>
               <SidebarMenu>
                 {item.items.map((item) => (
                   <SidebarMenuItem key={item.title}>
                     <SidebarMenuButton asChild isActive={item.isActive}>
-                      <a href={item.url}>{item.title}</a>
+                      <a
+                        href={item.url}
+                        className="flex gap-2 items-center w-full"
+                      >
+                        <Icon icon={item.icon} /> {item.title}
+                      </a>
                     </SidebarMenuButton>
                   </SidebarMenuItem>
                 ))}
               </SidebarMenu>
+              {/* <SidebarTrigger className="-ml-1 text-center " /> */}
             </SidebarGroupContent>
           </SidebarGroup>
         ))}
-        <SidebarTrigger className="-ml-1" />
       </SidebarContent>
       <SidebarRail />
     </Sidebar>

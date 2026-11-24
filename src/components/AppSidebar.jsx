@@ -19,7 +19,7 @@ import { Icon } from "@iconify/react";
 const data = {
   navMain: [
     {
-      title: "",
+      title: "SMART BUDGET PLANNER",
       url: "#",
       items: [
         {
@@ -60,16 +60,14 @@ const data = {
 function AppSidebar({ ...props }) {
   return (
     <Sidebar {...props}>
-      <SidebarHeader className="flex-row justify-between text-2xl">
-        <h2 className="">Smart Budget Planner</h2>{" "}
-        <SidebarTrigger className="-ml-1 text-center " />
-      </SidebarHeader>
       <SidebarContent className="flex flex-row justify-between">
-        {/* <SidebarTrigger className="-ml-1 text-center " /> */}
         {/* We create a SidebarGroup for each parent. */}
         {data.navMain.map((item) => (
           <SidebarGroup key={item.title} className="">
-            <SidebarGroupLabel classname="">{item.title}</SidebarGroupLabel>
+            <div className="flex justify-between">
+              <SidebarGroupLabel classname="">{item.title}</SidebarGroupLabel>
+              <SidebarTrigger className="" />
+            </div>
 
             <SidebarGroupContent>
               <SidebarMenu>
@@ -86,7 +84,6 @@ function AppSidebar({ ...props }) {
                   </SidebarMenuItem>
                 ))}
               </SidebarMenu>
-              {/* <SidebarTrigger className="-ml-1 text-center " /> */}
             </SidebarGroupContent>
           </SidebarGroup>
         ))}

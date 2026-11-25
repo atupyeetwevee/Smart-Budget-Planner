@@ -52,6 +52,8 @@ function SignupForm() {
         password: formData.password,
       });
 
+      console.log("4. Registration response:", data);
+
       setMessage(
         data.session
           ? "Registration successful!"

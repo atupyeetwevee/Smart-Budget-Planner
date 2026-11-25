@@ -1,7 +1,9 @@
 import { supabase } from "@/lib/supabase";
 
-const signUpApi = async ({ email, password }) =>
+const signUpUser = async ({ email, password }) =>
   await supabase.auth.signUp({
     email,
     password,
   });
+
+export default signUpUser;

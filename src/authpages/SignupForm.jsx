@@ -8,12 +8,62 @@ import {
   FieldSeparator,
 } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
+import { useSignUp } from "@/hooks/useSignUp";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 
 function SignupForm() {
+  const { mutateAsync, isPending, error } = useSignUp(); //Connecting registration function
+
+  //Creating a place to store form information
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+  });
+
+  const [message, setMessage] = useState("");
+
+  //listens to whatever is typed into an input field and updates formData
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  const handleSignUp = async (e) => {
+    e.preventDefault();
+    setMessage("");
+
+    if (formData.password !== formData.confirmPassword) {
+      setMessage("Passwords do not match");
+      return; //Don't execute the remaining code
+    }
+
+    //calling the registration function you received from useRegister()
+    try {
+      const data = await mutateAsync({
+        name: formData.name,
+        email: formData.email,
+        password: formData.password,
+      });
+
+      setMessage(
+        data.session
+          ? "Registration successful!"
+          : "Account created! Please check your email.",
+      );
+    } catch (err) {
+      setMessage(err.message);
+    }
+  };
   return (
     <>
-      <form className="p-6 md:p-8">
+      <form onSubmit={handleSignUp} className="p-6 md:p-8">
         <FieldGroup>
           <div className="flex flex-col items-center gap-2 text-center">
             <h1 className="text-2xl font-bold">Create your account</h1>
@@ -22,12 +72,27 @@ function SignupForm() {
             </p>
           </div>
           <Field>
+            <FieldLabel htmlFor="name">Full Name</FieldLabel>
+            <Input
+              id="name"
+              name="name"
+              type="text"
+              value={formData.name}
+              placeholder="eg. Aylee Mayson"
+              required
+              onChange={handleChange}
+            />
+          </Field>
+          <Field>
             <FieldLabel htmlFor="email">Email</FieldLabel>
             <Input
               id="email"
+              name="email"
               type="email"
+              value={formData.email}
               placeholder="m@example.com"
               required
+              onChange={handleChange}
             />
             <FieldDescription className="text-xs">
               We&apos;ll use this to contact you. We will not share your email
@@ -38,13 +103,30 @@ function SignupForm() {
             <Field className="grid grid-cols-2 gap-4">
               <Field>
                 <FieldLabel htmlFor="password">Password</FieldLabel>
-                <Input id="password" type="password" required />
+                <Input
+                  id="password"
+                  type="password"
+                  name="password"
+                  placeholder="Enter password"
+                  required
+                  value={formData.password}
+                  onChange={handleChange}
+                />
               </Field>
               <Field>
                 <FieldLabel htmlFor="confirm-password">
                   Confirm Password
                 </FieldLabel>
-                <Input id="confirm-password" type="password" required />
+                <Input
+                  id="confirm-password"
+                  type="password"
+                  name="confirmPassword"
+                  placeholder="Confirm Password"
+                  value={formData.confirmPassword}
+                  onChange={handleChange}
+                  required
+                />
+                {error && <p>{error.message}</p>}
               </Field>
             </Field>
             <FieldDescription className="text-xs">
@@ -52,7 +134,9 @@ function SignupForm() {
             </FieldDescription>
           </Field>
           <Field>
-            <Button type="submit">Create Account</Button>
+            <Button type="submit" disabled={isPending}>
+              {isPending ? "Creating account..." : "Create Account"}
+            </Button>
           </Field>
           <FieldSeparator className="*:data-[slot=field-separator-content]:bg-card text-xs">
             Or continue with

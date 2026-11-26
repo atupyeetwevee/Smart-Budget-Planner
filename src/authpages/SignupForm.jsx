@@ -8,7 +8,7 @@ import {
   FieldSeparator,
 } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
-import { useSignUp } from "@/hooks/useSignUp";
+import { useSignUp } from "@/hooks/useAuth";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
@@ -24,6 +24,7 @@ function SignupForm() {
   });
 
   const [message, setMessage] = useState("");
+  const [messageType, setMessageType] = useState("");
 
   //listens to whatever is typed into an input field and updates formData
   const handleChange = (e) => {
@@ -41,7 +42,14 @@ function SignupForm() {
 
     if (formData.password !== formData.confirmPassword) {
       setMessage("Passwords do not match");
+      setMessageType("error");
       return; //Don't execute the remaining code
+    }
+
+    if (formData.password.length < 8) {
+      setMessage("Password must be at least 8 characters long.");
+      setMessageType("error");
+      return;
     }
 
     //calling the registration function you received from useRegister()
@@ -52,15 +60,24 @@ function SignupForm() {
         password: formData.password,
       });
 
-      console.log("4. Registration response:", data);
+      console.log("Registration response:", data);
 
       setMessage(
         data.session
           ? "Registration successful!"
           : "Account created! Please check your email.",
       );
+      setMessageType("success");
+
+      setFormData({
+        name: "",
+        email: "",
+        password: "",
+        confirmPassword: "",
+      });
     } catch (err) {
-      setMessage(err.message);
+      setMessage(err.message || "Registration failed. Please try again.");
+      setMessageType("error");
     }
   };
   return (
@@ -114,13 +131,25 @@ function SignupForm() {
                   value={formData.password}
                   onChange={handleChange}
                 />
+                {/* {error && (
+                  <p
+                    className={`text-sm text-center ${
+                      message.includes("successfully") ||
+                      message.includes("Account created")
+                        ? "text-green-600"
+                        : "text-red-500"
+                    }`}
+                  >
+                    {message}
+                  </p>
+                )} */}
               </Field>
               <Field>
-                <FieldLabel htmlFor="confirm-password">
+                <FieldLabel htmlFor="confirmPassword">
                   Confirm Password
                 </FieldLabel>
                 <Input
-                  id="confirm-password"
+                  id="confirmPassword"
                   type="password"
                   name="confirmPassword"
                   placeholder="Confirm Password"
@@ -128,12 +157,32 @@ function SignupForm() {
                   onChange={handleChange}
                   required
                 />
-                {error && <p>{error.message}</p>}
+                {/* {error && (
+                  <p
+                    className={`text-sm text-center ${
+                      message.includes("successfully") ||
+                      message.includes("Account created")
+                        ? "text-green-600"
+                        : "text-red-500"
+                    }`}
+                  >
+                    {message}
+                  </p>
+                )} */}
               </Field>
             </Field>
             <FieldDescription className="text-xs">
               Must be at least 8 characters long.
             </FieldDescription>
+            {message && (
+              <p
+                className={`text-sm ${
+                  messageType === "success" ? "text-green-600" : "text-red-500"
+                }`}
+              >
+                {message}
+              </p>
+            )}
           </Field>
           <Field>
             <Button type="submit" disabled={isPending}>
@@ -155,7 +204,7 @@ function SignupForm() {
             </Button>
           </Field>
           <FieldDescription className="text-center">
-            Already have an account? <Link to="/">Sign in</Link>
+            Already have an account? <Link to="/login">Sign in</Link>
           </FieldDescription>
         </FieldGroup>
       </form>

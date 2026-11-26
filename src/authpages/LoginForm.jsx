@@ -7,12 +7,51 @@ import {
   FieldSeparator,
 } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
-import { Link } from "react-router-dom";
+import { useLogIn } from "@/hooks/useAuth";
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
 function LoginForm() {
+  const navigate = useNavigate();
+
+  const { mutateAsync, isPending } = useLogIn();
+
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
+
+  const [message, setMessage] = useState("");
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    setMessage("");
+
+    if (!formData.email || !formData.password) {
+      setMessage("Please fill in all fields.");
+      return;
+    }
+
+    try {
+      await mutateAsync(formData);
+
+      navigate("/");
+    } catch (error) {
+      setMessage(error.message);
+    }
+  };
+
   return (
     <>
-      <form className="p-6 md:p-8">
+      <form onSubmit={handleLogin} className="p-6 md:p-8">
         <FieldGroup>
           <div className="flex flex-col items-center gap-2 text-center">
             <h1 className="text-2xl font-bold">Welcome back</h1>
@@ -25,7 +64,10 @@ function LoginForm() {
             <Input
               id="email"
               type="email"
-              placeholder="m@example.com"
+              name="email"
+              placeholder="Email address"
+              value={formData.email}
+              onChange={handleChange}
               required
             />
           </Field>
@@ -39,10 +81,21 @@ function LoginForm() {
                 Forgot your password?
               </a>
             </div>
-            <Input id="password" type="password" required />
+            <Input
+              id="password"
+              type="password"
+              name="password"
+              placeholder="Password"
+              value={formData.password}
+              onChange={handleChange}
+              required
+            />
+            {message && <p className="text-sm text-red-500">{message}</p>}
           </Field>
           <Field>
-            <Button type="submit">Login</Button>
+            <Button type="submit" disabled={isPending} className="w-full">
+              {isPending ? "Logging in..." : "Login"}
+            </Button>
           </Field>
           <FieldSeparator className="*:data-[slot=field-separator-content]:bg-card text-xs">
             Or continue with

@@ -10,6 +10,8 @@ import BudgetPage from "./pages/BudgetPage";
 import IncomePage from "./pages/IncomePage";
 import SavingsPage from "./pages/SavingsPage";
 import FinancialReportPage from "./pages/FinancialReportPage";
+import ForgotPassword from "./authpages/ForgotPassword";
+import UpdatePassword from "./authpages/updatePassword";
 
 function App() {
   return (
@@ -19,6 +21,8 @@ function App() {
         <Route element={<AuthLayout />}>
           <Route path="/login" element={<LoginForm />} />
           <Route path="/signup" element={<SignupForm />} />
+          <Route path="/forgetpassword" element={<ForgotPassword />} />
+          <Route path="/updatepasword" element={<UpdatePassword />} />
         </Route>
 
         {/* Main pages */}

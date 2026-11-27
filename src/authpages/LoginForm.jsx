@@ -75,10 +75,10 @@ function LoginForm() {
             <div className="flex items-center">
               <FieldLabel htmlFor="password">Password</FieldLabel>
               <a
-                href="#"
+                href="/forgetpassword"
                 className="ml-auto text-xs underline-offset-2 hover:underline"
               >
-                Forgot your password?
+                Forget your password?
               </a>
             </div>
             <Input

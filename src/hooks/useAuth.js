@@ -1,4 +1,10 @@
-import { signUpUser, loginUser } from "@/services/auth.service";
+import {
+  signUpUser,
+  loginUser,
+  resetPassword,
+  updatePassword,
+  logoutUser,
+} from "@/services/auth.service";
 import { useMutation } from "@tanstack/react-query";
 
 export const useSignUp = () => {
@@ -10,5 +16,23 @@ export const useSignUp = () => {
 export const useLogIn = () => {
   return useMutation({
     mutationFn: loginUser,
+  });
+};
+
+export const useResetPassword = () => {
+  return useMutation({
+    mutationFn: resetPassword,
+  });
+};
+
+export const useUpdatePassword = () => {
+  return useMutation({
+    mutationFn: updatePassword,
+  });
+};
+
+export const useLogOut = () => {
+  return useMutation({
+    mutationFn: logoutUser,
   });
 };

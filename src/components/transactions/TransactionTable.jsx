@@ -8,8 +8,8 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Icon } from "@iconify/react";
-import { Button } from "./ui/button";
-import { Separator } from "./ui/separator";
+import { Button } from "../ui/button";
+import { Separator } from "../ui/separator";
 
 function IncomeTable() {
   const bills = [

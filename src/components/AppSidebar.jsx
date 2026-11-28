@@ -65,7 +65,7 @@ function AppSidebar({ ...props }) {
         {data.navMain.map((item) => (
           <SidebarGroup key={item.title} className="">
             <div className="flex justify-between">
-              <SidebarGroupLabel classname="">{item.title}</SidebarGroupLabel>
+              <SidebarGroupLabel className="">{item.title}</SidebarGroupLabel>
               <SidebarTrigger className="" />
             </div>
 

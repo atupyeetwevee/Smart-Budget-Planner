@@ -36,3 +36,9 @@ export const useLogOut = () => {
     mutationFn: logoutUser,
   });
 };
+
+export const useGetUser = () => {
+  return useMutation({
+    mutationFn: logoutUser,
+  });
+};

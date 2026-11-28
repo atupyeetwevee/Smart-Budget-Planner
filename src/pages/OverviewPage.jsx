@@ -4,6 +4,8 @@ import { Icon } from "@iconify/react";
 import { LucideArrowRight } from "lucide-react";
 import RecentTransactionTable from "@/components/RecentTransactionTable";
 import LiveEmoji from "@/components/LiveEmoji";
+import { useEffect, useState } from "react";
+import { getCurrentUser } from "@/services/auth.service";
 
 function OverviewPage() {
   const summaryCards = [
@@ -32,12 +34,28 @@ function OverviewPage() {
       color: "#A855F7",
     },
   ];
+
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        const currentUser = await getCurrentUser();
+        setUser(currentUser);
+      } catch (error) {
+        console.error(error.message);
+      }
+    };
+
+    fetchUser();
+  }, []);
+
   return (
     <>
       <div className="flex flex-1 flex-col gap-4 min-h-0 p-4">
-        {/* <header className="flex h-16 shrink-0 items-center gap-2 border-b px-4">
+        <header className="flex h-16 shrink-0 items-center gap-2 border-b px-4 text-3xl font-bold">
           Welcome, {user?.user_metadata?.full_name}
-        </header> */}
+        </header>
         <div className="grid auto-rows-min gap-4 md:grid-cols-4">
           {summaryCards.map((item) => (
             <div

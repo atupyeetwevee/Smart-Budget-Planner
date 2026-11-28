@@ -5,7 +5,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import {
   addTransaction,
   getTransactions,
-} from "@/services/transaction.service";
+} from "@/services/transactions.service";
 
 // Create a hook for retrieving transactions.
 export const useTransactions = () => {

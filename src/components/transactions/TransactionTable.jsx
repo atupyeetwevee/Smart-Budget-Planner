@@ -1,70 +1,35 @@
-import {
-  Table,
-  TableBody,
-  TableCaption,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
-import { Icon } from "@iconify/react";
+import { Table, TableBody } from "@/components/ui/table";
+
 import { Button } from "../ui/button";
 import { Separator } from "../ui/separator";
+import { useTransactions } from "@/hooks/useTransactions";
 
-function IncomeTable() {
-  const bills = [
-    {
-      title: "House Rent",
-      amount: 200000,
-      icon: "clarity:house-solid",
-      color: "#5683e9",
-      bgColor: "#e8effd",
-    },
-    {
-      title: "Groceries",
-      amount: 100000,
-      icon: "lucide-extended:groceries-filled",
-      color: "#b3ed74",
-      bgColor: "#e0f6e5",
-    },
-    {
-      title: "Electricity",
-      amount: 20000,
-      icon: "healthicons:electricity-outline",
-      color: "#fdb91b",
-      bgColor: "#ebe5dc",
-    },
-    {
-      title: "House Rent",
-      amount: 200000,
-      icon: "clarity:house-solid",
-      color: "#5683e9",
-      bgColor: "#e8effd",
-    },
-    {
-      title: "Groceries",
-      amount: 100000,
-      icon: "lucide-extended:groceries-filled",
-      color: "#b3ed74",
-      bgColor: "#e0f6e5",
-    },
-    {
-      title: "Electricity",
-      amount: 20000,
-      icon: "healthicons:electricity-outline",
-      color: "#fdb91b",
-      bgColor: "#ebe5dc",
-    },
-  ];
+// Create a reusable table for income and expenses.
+function TransactionTable({ type }) {
+  // Retrieve transaction data from Supabase.
+  const { data: transactions, isLoading, error } = useTransactions();
+
+  // Display loading information while fetching records.
+  if (isLoading) return <p>Loading transactions...</p>;
+
+  // Display an error if the request fails.
+  if (error) return <p>Error: {error.message}</p>;
+
+  // Filter transactions according to the selected type.
+  const filteredTransactions =
+    transactions?.filter((transaction) => transaction.type === type) || [];
+
+  // Format amounts into Tanzanian shillings.
+  const formatAmount = (amount) =>
+    new Intl.NumberFormat("en-TZ", {
+      style: "currency",
+      currency: "TZS",
+      maximumFractionDigits: 2,
+    }).format(amount);
+
+  // Render the transaction table.
   return (
     <div className="">
-      <div className="flex justify-between items-center p-4">
-        <p className="font-bold">Your Income Sources</p>
-        <Button className="bg-neutral-100 hover:bg-lime-300/80 text-black hover:text-white border-gray-300">
-          +Add Income
-        </Button>
-      </div>
-      <Separator orientation="horizontal" classname="h-auto" />
       <Table>
         {/* <TableCaption>A list of your recent invoices.</TableCaption> */}
         {/* <TableHeader>
@@ -76,29 +41,37 @@ function IncomeTable() {
           </TableRow>
         </TableHeader> */}
         <TableBody>
-          {bills.map((item) => (
-            <TableRow>
-              <TableCell className="text-center">
-                <div
-                  className="flex justify-center items-center h-9 w-9 rounded-full"
-                  style={{ backgroundColor: item.bgColor }}
-                >
-                  <Icon
-                    icon={item.icon}
-                    className="text-2xl"
-                    style={{ color: item.color }}
-                  />
-                </div>
-              </TableCell>
-              <TableCell>{item.title}</TableCell>
+          {/* Display the retrieved transaction records. */}
+          {filteredTransactions.length > 0 ? (
+            filteredTransactions.map((transaction) => (
+              <tr key={transaction.id} className="border-b">
+                {/* Display the income source or expense name. */}
+                <td className="p-3">{transaction.name}</td>
 
-              <TableCell className="text-right">{item.amount}</TableCell>
-            </TableRow>
-          ))}
+                {/* Display the transaction category. */}
+                <td className="p-3">{transaction.category}</td>
+
+                {/* Display the formatted transaction amount. */}
+                <td className="p-3 font-medium">
+                  {formatAmount(transaction.amount)}
+                </td>
+
+                {/* Display the transaction date. */}
+                <td className="p-3">{transaction.transaction_date}</td>
+              </tr>
+            ))
+          ) : (
+            // Display a message when there are no records.
+            <tr>
+              <td colSpan="4" className="p-4 text-center text-muted-foreground">
+                No {type} records found.
+              </td>
+            </tr>
+          )}
         </TableBody>
       </Table>
     </div>
   );
 }
 
-export default IncomeTable;
+export default TransactionTable;

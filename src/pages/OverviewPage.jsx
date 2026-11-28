@@ -53,9 +53,12 @@ function OverviewPage() {
   return (
     <>
       <div className="flex flex-1 flex-col gap-4 min-h-0 p-4">
-        <header className="flex h-16 shrink-0 items-center gap-2 border-b px-4 text-3xl font-bold">
-          Welcome, {user?.user_metadata?.full_name}
-        </header>
+        <header className="flex h-16 shrink-0 items-center gap-2 border-b px-4 text-3xl font-bold"></header>
+        <div className="w-full h-50 px-4 py-4 rounded-2xl bg-lime-300/80 border border-gray-400/80">
+          <h1 className="text-3xl font-bold">
+            Welcome, {user?.user_metadata?.full_name}
+          </h1>
+        </div>
         <div className="grid auto-rows-min gap-4 md:grid-cols-4">
           {summaryCards.map((item) => (
             <div
